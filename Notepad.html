@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>记事本</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        a {
+            cursor: default;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+        }
+
+        p {
+            font-style: normal;
+            font-size: 6px;
+            text-align: left;
+            line-height: 25px;
+            display: inline;
+        }
+        #div_head {
+            width: 300px;
+            height: 22px;
+            border-left: 1px solid black;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+        }
+
+        #btn_close {
+            float: right;
+            width: 40px;
+            height: 22px;
+            margin: 0;
+            background-color: white;
+            border: 0;
+        }
+
+        #btn_close:hover {
+            background-color: red;
+        }
+
+        #btn_close:focus {
+            background-color: #A8A8A8;
+        }
+
+        #btn_close:active {
+            background-color: white;
+        }
+
+        #btn_enlarge {
+            float: right;
+            width: 40px;
+            height: 22px;
+            margin: 0;
+            background-color: white;
+            border: 0;
+        }
+
+        #btn_enlarge:hover {
+            background-color: #cccccc;
+        }
+
+        #btn_enlarge:focus {
+            background-color: #A8A8A8;
+        }
+
+        #btn_enlarge:active {
+            background-color: white;
+        }
+
+        #btn_minimize {
+            float: right;
+            width: 40px;
+            height: 22px;
+            margin: 0;
+            background-color: white;
+            border: 0;
+        }
+
+        #btn_minimize:hover {
+            background-color: #cccccc;
+        }
+
+        #btn_minimize:focus {
+            background-color: #A8A8A8;
+        }
+
+        #btn_minimize:active {
+            background-color: white;
+        }
+
+        #btn_narrow {
+            float: right;
+            width: 40px;
+            height: 22px;
+            margin: 0;
+            background-color: white;
+            border: 0;
+            display: none;
+        }
+
+        #btn_narrow:hover {
+            background-color: #cccccc;
+        }
+
+        #btn_narrow:focus {
+            background-color: #A8A8A8;
+        }
+
+        #btn_narrow:active {
+            background-color: white;
+        }
+
+        #div_content {
+            width: 300px;
+            height: 18px;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid #999999;
+        }
+
+        .li1 {
+            font-size: 6px;
+            list-style-type: none;
+            float: left;
+            padding: 3px;
+        }
+
+        .li1:hover > a {
+            background-color: cyan;
+        }
+
+        .li1:focus > a {
+            background-color: blue;
+        }
+
+        .li2 {
+            font-size: 6px;
+            list-style-type: none;
+            float: left;
+            padding: 3px;
+        }
+
+        .li2:hover > a {
+            background-color: cyan;
+        }
+
+        .li2:focus > a {
+            background-color: blue;
+        }
+
+        .li3 {
+            font-size: 6px;
+            list-style-type: none;
+            float: left;
+            padding: 3px;
+        }
+
+        .li3:hover > a {
+            background-color: cyan;
+        }
+
+        .li3:focus > a {
+            background-color: blue;
+        }
+
+        .li4 {
+            font-size: 6px;
+            list-style-type: none;
+            float: left;
+            padding: 3px;
+        }
+
+        .li4:hover > a {
+            background-color: cyan;
+        }
+
+        .li4:focus > a {
+            background-color: blue;
+        }
+
+        .li5 {
+            font-size: 6px;
+            list-style-type: none;
+            float: left;
+            padding: 3px;
+        }
+
+        .li5:hover > a {
+            background-color: cyan;
+        }
+
+        .li5:focus > a {
+            background-color: blue;
+        }
+
+        #div_content ul .li1 .ul1 {
+            padding: 0;
+            display: none;
+            position: absolute;
+            z-index: 1;
+            background-color: #efefef;
+        }
+
+        #div_content ul .li1:hover .ul1 {
+            display: block;
+        }
+
+        #div_content ul .li1 .ul1 li:hover {
+            background-color: cornflowerblue;
+        }
+
+        #div_content ul .li2 .ul2 {
+            padding: 0;
+            display: none;
+            position: absolute;
+            z-index: 1;
+            background-color: #efefef;
+        }
+
+        #div_content ul .li2:hover .ul2 {
+            display: block;
+        }
+
+        #div_content ul .li2 .ul2 li:hover {
+            background-color: cornflowerblue;
+        }
+
+        #div_content ul .li3 .ul3 {
+            padding: 0;
+            display: none;
+            position: absolute;
+            z-index: 1;
+            background-color: #efefef;
+        }
+
+        #div_content ul .li3:hover .ul3 {
+            display: block;
+        }
+
+        #div_content ul .li3 .ul3 li:hover {
+            background-color: cornflowerblue;
+        }
+
+        #div_content ul .li4 .ul4 {
+            padding: 0;
+            display: none;
+            position: absolute;
+            z-index: 1;
+            background-color: #efefef;
+        }
+
+        #div_content ul .li4:hover .ul4 {
+            display: block;
+        }
+
+        #div_content ul .li4 .ul4 li:hover {
+            background-color: cornflowerblue;
+        }
+
+        #div_content ul .li5 .ul5 {
+            padding: 0;
+            display: none;
+            position: absolute;
+            z-index: 1;
+            background-color: #efefef;
+        }
+
+        #div_content ul .li5:hover .ul5 {
+            display: block;
+        }
+
+        #div_content ul .li5 .ul5 li:hover {
+            background-color: cornflowerblue;
+        }
+
+        #div_foot {
+            width: 300px;
+            height: 350px;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div id="div_frame" style="background-color: white;position:absolute;top: 0;left: 0;border: 1px solid white">
+    <div id="div_head">
+        <p>新建文本文档.txt - 记事本</p>
+        <button id="btn_close" class="btn">×</button>
+        <button id="btn_enlarge" class="btn">□</button>
+        <button id="btn_narrow" class="btn">+</button>
+        <button id="btn_minimize" class="btn">-</button>
+    </div>
+    <div id="div_content">
+        <ul>
+            <li class="li1"><a href="#">文件(F)</a>
+                <ul class="ul1">
+                    <li><a href="#">新建(N)</a></li>
+                    <li><a href="#">打开(O)</a></li>
+                    <li><a href="#">保存(S)</a></li>
+                    <li><a href="#">另存为(A)</a></li>
+                    <li><a href="#">页面设置(U)</a></li>
+                    <li><a href="#">打印(P)</a></li>
+                    <li><a href="#">退出(X)</a></li>
+                </ul>
+            </li>
+            <li class="li2"><a href="#">编辑(E)</a>
+                <ul class="ul2">
+                    <li><a href="#">撤销(U)</a></li>
+                    <li><a href="#">剪切(T)</a></li>
+                    <li><a href="#" onclick="copyText()">复制(C)</a></li>
+                    <li><a href="#">粘贴(P)</a></li>
+                    <li><a href="#">删除(L)</a></li>
+                    <li><a href="#">查找(F)</a></li>
+                    <li><a href="#">查找下一个(N)</a></li>
+                    <li><a href="#">替换(R)</a></li>
+                    <li><a href="#">转到(G)</a></li>
+                    <li><a href="#">全选(A)</a></li>
+                    <li><a href="#">时间/日期(D)</a></li>
+                </ul>
+            </li>
+            <li class="li3"><a href="#">格式(O)</a>
+                <ul class="ul3">
+                    <li><a href="#">自动换行(W)</a></li>
+                    <li><a href="#">字体(F)</a></li>
+                </ul>
+            </li>
+            <li class="li4"><a href="#">查看(V)</a>
+                <ul class="ul4">
+                    <li><a href="#">状态栏(S)</a></li>
+                </ul>
+            </li>
+            <li class="li5"><a href="#">帮助(H)</a>
+                <ul class="ul5">
+                    <li><a href="#">查看帮助(H)</a></li>
+                    <li><a href="#">关于记事本(A)</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="div_foot" contenteditable="true">
+    </div>
+</div>
+<script type="text/javascript">
+    var div_frame = document.getElementById('div_frame');
+    var div_head = document.getElementById('div_head');
+    var div_content = document.getElementById('div_content');
+    var div_foot = document.getElementById('div_foot');
+    var btn_narrow = document.getElementById('btn_narrow');
+    var btn_enlarge = document.getElementById('btn_enlarge');
+    var btn_close = document.getElementById('btn_close');
+
+    document.onmousedown = function (e) {
+        var DisX, DisY;
+        DisX = e.pageX - parseInt(div_frame.style.left);
+        DisY = e.pageY - parseInt(div_frame.style.top);
+        if (DisY < 40) {
+            document.onmousemove = function (e) {
+                var e = e || window.event;
+                //console.log(e.pageX + " " + e.pageY);
+                div_frame.style.left = e.pageX - DisX + "px";
+                div_frame.style.top = e.pageY - DisY + "px";
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        }
+    }
+
+    btn_close.addEventListener("click", function () {
+        div_frame.style.display = "none";
+    })
+
+    btn_enlarge.addEventListener("click", function () {
+        var docElm = document.getElementById('div_frame');
+        if (docElm.requestFullscreen) {
+            docElm.requestFullscreen();
+        }
+        else if (docElm.webkitRequestFullScreen) {
+            docElm.webkitRequestFullScreen();
+        }
+        setTimeout(function () {
+            var docElm = document.getElementById('div_frame');
+            div_head.style.width = docElm.offsetWidth + "px";
+            div_content.style.width = docElm.offsetWidth + "px";
+            div_foot.style.width = docElm.offsetWidth + "px";
+            div_foot.style.height = docElm.offsetHeight - 40 + "px";
+            btn_enlarge.style.display = "none";
+            btn_narrow.style.display = "block";
+        },200)
+        textarea.style.width = div_foot.offsetWidth + "px";
+        textarea.style.height = div_foot.offsetHeight + "px";
+    })
+
+    btn_minimize.addEventListener("click", function () {
+
+    })
+
+    btn_narrow.addEventListener("click", function () {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+        setTimeout(function () {
+            div_head.style.width = div_head.offsetWidth + "px";
+            div_content.style.width = div_content.offsetWidth + "px";
+            div_foot.style.width = div_foot.offsetWidth + "px";
+            div_foot.style.height = div_foot.offsetHeight + "px";
+            btn_narrow.style.display = "none";
+            btn_enlarge.style.display = "block";
+        },400)
+    })
+
+    div_frame.onmouseover = function (e) {
+        var e = e || event;
+        var x = e.clientX;
+        var y = e.clientY;
+        if (div_frame.offsetLeft - x >= -3 && div_frame.offsetLeft - x <= 3) {
+            this.style.cursor = "w-resize";
+        }
+        if (div_frame.offsetWidth + div_frame.offsetLeft - (x+1) >= -3 && div_frame.offsetWidth + div_frame.offsetLeft - (x+1) <= 3) {
+            this.style.cursor = "e-resize";
+        }
+        if (div_frame.offsetTop - y >= -3 && div_frame.offsetTop - y <= 3) {
+            this.style.cursor = "n-resize";
+        }
+        if (div_frame.offsetHeight + div_frame.offsetTop - (y+1) >= -3 && div_frame.offsetHeight + div_frame.offsetTop - (y+1) <= 3) {
+            this.style.cursor = "s-resize";
+        }
+        if (x == div_frame.offsetLeft && y == div_frame.offsetTop) {
+            this.style.cursor = "nw-resize";
+        }
+        if (x + 1 == div_frame.offsetWidth + div_frame.offsetLeft && y == div_frame.offsetTop) {
+            this.style.cursor = "ne-resize";
+        }
+        if (x + 1 == div_frame.offsetWidth + div_frame.offsetLeft && y + 1 == div_frame.offsetHeight + div_frame.offsetTop) {
+            this.style.cursor = "se-resize";
+        }
+        if (x == div_frame.offsetLeft && y + 1 == div_frame.offsetHeight + div_frame.offsetTop) {
+            this.style.cursor = "sw-resize";
+        }
+        div_frame.onmousemove = function (e) {
+            var e = e || event;
+            var xx = e.clientX;
+            var yy = e.clientY;
+            if (div_frame.offsetLeft - xx <= 6 && div_frame.offsetLeft - xx >= -6) {
+                this.style.cursor = "w-resize";
+            }
+            if (div_frame.offsetWidth + div_frame.offsetLeft - (xx+1) <= 6 && div_frame.offsetWidth + div_frame.offsetLeft - (xx+1) >= -6) {
+                this.style.cursor = "e-resize";
+            }
+            // if (xx - div_frame.offsetLeft > 5 && div_frame.offsetWidth + div_frame.offsetLeft - (xx+1) > 5) {
+            //        this.style.cursor = "default";
+            // }
+            if (div_frame.offsetTop - yy <= 6 && div_frame.offsetTop - yy >= -6) {
+                this.style.cursor = "n-resize";
+            }
+            if (div_frame.offsetHeight + div_frame.offsetTop - (yy+1) <= 6 && div_frame.offsetHeight + div_frame.offsetTop - (yy+1) >= -6) {
+                this.style.cursor = "s-resize";
+            }
+            if (xx - div_frame.offsetLeft > 6 && div_frame.offsetWidth + div_frame.offsetLeft - (xx+1) > 6 && yy - div_frame.offsetTop > 6 && div_frame.offsetHeight + div_frame.offsetTop - (yy+1) > 6) {
+                this.style.cursor = "default";
+            }
+        }
+    }
+
+    div_frame.onmousedown = function (e) {
+        e = e || event;
+        var x = e.clientX;
+        var y = e.clientY;
+        var divL = div_frame.offsetLeft;
+        var divT = div_frame.offsetTop;
+        var divW = div_frame.offsetWidth;
+        var divH = div_frame.offsetHeight;
+
+        var d = 0;
+        if (x < divL + 8) {
+            d = 'left';
+        }
+        else if (x > divL + divW - 8) {
+            d = 'right';
+        }
+
+        if (y < divT + 8) {
+            d = 'top';
+        }
+        else if (d < divT + divH - 8) {
+            d = 'bottom';
+        }
+        if (x < divL + 8 && y < divT + 8) {
+            d = 'LT';
+        }
+        document.onmousemove = function (e) {
+            e = e || event;
+            var xx = e.clientX;
+            var yy = e.clientY;
+            if (d == 'left') {
+                div_frame.style.width = divW + x - xx + 'px';
+                div_frame.style.left = xx + 'px';
+                div_head.style.width = div_frame.offsetWidth - 4 + "px";
+                div_content.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.height = div_frame.offsetHeight - 44 + "px";
+                if(div_frame.offsetWidth < 120) {
+                    div_head.style.width = 120 + "px";
+                    div_content.style.width = 120 + "px";
+                    div_foot.style.width = 120 + "px";
+                }
+            }
+            else if (d == 'right') {
+                div_frame.style.width = divW + xx - x + 'px';
+                div_head.style.width = div_frame.offsetWidth - 4 + "px";
+                div_content.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.height = div_frame.offsetHeight - 44 + "px";
+                if(div_frame.offsetWidth < 120) {
+                    div_head.style.width = 120 + "px";
+                    div_content.style.width = 120 + "px";
+                    div_foot.style.width = 120 + "px";
+                }
+            }
+
+            if (d == 'top') {
+                div_frame.style.height = divH + y - yy + 'px';
+                div_frame.style.top = yy + 'px';
+                div_head.style.width = div_frame.offsetWidth - 4 + "px";
+                div_content.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.height = div_frame.offsetHeight - 44 + "px";
+            }
+            else if (d == 'bottom') {
+                div_frame.style.height = divH + yy - y + 'px';
+                div_head.style.width = div_frame.offsetWidth - 4 + "px";
+                div_content.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.height = div_frame.offsetHeight - 44 + "px";
+            }
+            if (d == 'LT') {
+                div_frame.style.width = divW + x - xx + 'px';
+                div_frame.style.left = xx + 'px';
+                div_frame.style.height = divH + y - yy + 'px';
+                div_frame.style.top = yy + 'px';
+                div_head.style.width = div_frame.offsetWidth - 4 + "px";
+                div_content.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.width = div_frame.offsetWidth - 4 + "px";
+                div_foot.style.height = div_frame.offsetHeight - 44 + "px";
+            }
+            return false;
+        }
+        document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+        // if (e.preventDefault) {
+        //     e.preventDefault();
+        // }
+        div_head.style.width = div_frame.offsetWidth - 4 + "px";
+        div_content.style.width = div_frame.offsetWidth - 4 + "px";
+        div_foot.style.width = div_frame.offsetWidth - 4 + "px";
+        div_foot.style.height = div_frame.offsetHeight - 44 + "px";
+    }
+
+    // function edit(element) {
+    //     var preve = element.previousSibling;
+    //     var prev = preve.nextElementSibling;
+    //     var oldhtml = prev.innerHTML;
+    //     prev.innerHTML = " ";
+    //     var newObj = document.createElement("textarea");
+    //     newObj.className = "textArea";
+    //     newObj.innerHTML = oldhtml;
+    //     prev.appendChild(newObj);
+    //     newObj.focus();
+    //     newObj.onblur = function(){
+    //         prev.innerHTML = this.value ? this.value : oldhtml;
+    //     }
+    // }
+
+    function copyText() {
+        var text = document.getElementById("div_foot").innerText;
+        var div_foot = document.getElementById('div_foot');
+        div_foot.value = text; // 修改文本框的内容
+        document.execCommand("copy"); // 执行浏览器复制命令
+        alert("复制成功");
+    }
+
+</script>
+</body>
+</html>
